@@ -1,15 +1,16 @@
 #or-monitor-panel {
-  display: inline-flex;
-  align-items: center;
+  display: flex;
+  align-items: flex-start;
   margin-left: 12px;
   vertical-align: middle;
   z-index: 2147483647;
 }
 
 .or-monitor-forum-panel {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
   color: #0f172a;
   font-family: "Segoe UI", "Helvetica Neue", sans-serif;
 }
@@ -19,8 +20,7 @@
   margin: 14px 0 12px;
 }
 
-.or-monitor-row,
-.or-monitor-inline {
+.or-monitor-row {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -32,8 +32,19 @@
 }
 
 .or-monitor-inline {
-  margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  margin: 8px 0 0 0;
   vertical-align: middle;
+}
+
+.or-monitor-inline-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
 }
 
 .or-monitor-pill {
@@ -111,6 +122,13 @@
 .or-monitor-button-ghost {
   background: rgba(15, 23, 42, 0.08);
   color: #0f172a;
+}
+
+.or-monitor-meta {
+  display: block;
+  width: 100%;
+  color: #475569;
+  font: 500 12px/1.35 "Segoe UI", "Helvetica Neue", sans-serif;
 }
 
 @media (max-width: 960px) {

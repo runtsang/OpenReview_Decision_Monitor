@@ -31,7 +31,7 @@
     PENDING: "pending"
   });
 
-  const POLL_INTERVAL_OPTIONS = Object.freeze([1, 5, 10, 30]);
+  const POLL_INTERVAL_OPTIONS = Object.freeze([1, 2, 3, 4, 5, 10, 30]);
   const LANGUAGE_OPTIONS = Object.freeze(["auto", "en", "zh"]);
 
   const DEFAULT_SETTINGS = Object.freeze({

@@ -219,18 +219,20 @@ async function checkMonitor(monitor, options = {}) {
     return { ok: false, error: "Monitor no longer exists" };
   }
 
+  const checkedAt = new Date().toISOString();
   const checkingMonitor = {
     ...current,
     status: current.status === ORMonitor.STATUS.DECIDED ? current.status : ORMonitor.STATUS.CHECKING,
+    lastChecked: checkedAt,
     lastError: "",
-    updatedAt: new Date().toISOString()
+    updatedAt: checkedAt
   };
   await upsertMonitor(checkingMonitor);
 
   try {
     const domResult = await checkViaDom(current, options);
     const result = domResult.decisionValue ? domResult : await checkViaApi(current, domResult);
-    let updatedMonitor = applyCheckResult(current, result);
+    let updatedMonitor = applyCheckResult(current, result, checkedAt);
     await upsertMonitor(updatedMonitor);
 
     const isNewDecision =
@@ -262,7 +264,7 @@ async function checkMonitor(monitor, options = {}) {
     const failedMonitor = {
       ...current,
       status: current.status === ORMonitor.STATUS.DECIDED ? ORMonitor.STATUS.DECIDED : ORMonitor.STATUS.FAILED,
-      lastChecked: new Date().toISOString(),
+      lastChecked: checkedAt,
       lastError: ORMonitor.safeMessage(error),
       updatedAt: new Date().toISOString()
     };
@@ -271,8 +273,8 @@ async function checkMonitor(monitor, options = {}) {
   }
 }
 
-function applyCheckResult(current, result) {
-  const now = new Date().toISOString();
+function applyCheckResult(current, result, checkedAt) {
+  const now = checkedAt || new Date().toISOString();
   const decisionValue = result.decisionValue || current.decisionValue || "";
   const hasDecision = Boolean(result.decisionValue || current.decisionValue);
   const status = hasDecision

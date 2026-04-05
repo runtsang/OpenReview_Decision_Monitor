@@ -162,6 +162,7 @@
 
     toolbar.appendChild(toggleButton);
     panel.appendChild(toolbar);
+    panel.appendChild(createLastCheckedMeta(monitor));
     panel.title = [buildMetaText(monitor), monitor && monitor.lastError ? monitor.lastError : ""]
       .filter(Boolean)
       .join("\n");
@@ -221,7 +222,7 @@
       return existing;
     }
 
-    const widget = document.createElement("span");
+    const widget = document.createElement("div");
     widget.className = INLINE_WIDGET_CLASS;
     widget.dataset.forumId = forumId;
     widget.dataset.orMonitorRoot = "true";
@@ -231,6 +232,9 @@
 
   function renderInlineWidget(widget, entry, monitor) {
     widget.innerHTML = "";
+
+    const toolbar = document.createElement("div");
+    toolbar.className = "or-monitor-inline-toolbar";
 
     const statusPill = createStatusPill(monitor);
     const refreshButton = createActionButton({
@@ -279,9 +283,11 @@
       }
     });
 
-    widget.appendChild(statusPill);
-    widget.appendChild(refreshButton);
-    widget.appendChild(toggleButton);
+    toolbar.appendChild(statusPill);
+    toolbar.appendChild(refreshButton);
+    toolbar.appendChild(toggleButton);
+    widget.appendChild(toolbar);
+    widget.appendChild(createLastCheckedMeta(monitor));
   }
 
   async function ensureMonitor(entry) {
@@ -379,6 +385,15 @@
       return `${ORMonitor.t("common.lastChecked", currentLanguage)}: ${ORMonitor.formatDateTime(monitor.lastChecked)}`;
     }
     return `${ORMonitor.t("common.status", currentLanguage)}: ${ORMonitor.t("display.tracking-no-decision", currentLanguage)}`;
+  }
+
+  function createLastCheckedMeta(monitor, tagName = "div") {
+    const meta = document.createElement(tagName);
+    meta.className = "or-monitor-meta";
+    meta.textContent = `${ORMonitor.t("common.lastChecked", currentLanguage)}: ${ORMonitor.formatDateTime(
+      monitor && monitor.lastChecked ? monitor.lastChecked : ""
+    )}`;
+    return meta;
   }
 
   function extractTitleFromLink(link) {
