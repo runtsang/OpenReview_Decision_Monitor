@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>OpenReview Decision Monitor</title>
+    <link rel="stylesheet" href="popup.css">
+  </head>
+  <body>
+    <main class="popup-shell">
+      <header class="popup-header">
+        <div>
+          <p id="popup-eyebrow" class="eyebrow"></p>
+          <h1 id="popup-title"></h1>
+        </div>
+        <div class="popup-controls">
+          <select id="language-select" class="language-select"></select>
+          <button id="refresh-all" class="ghost-button" type="button"></button>
+        </div>
+      </header>
+
+      <section class="summary-card">
+        <p id="summary-count" class="summary-count"></p>
+        <p id="summary-copy" class="summary-copy"></p>
+        <p id="methods-line" class="summary-copy"></p>
+      </section>
+
+      <section id="monitor-list" class="monitor-list"></section>
+      <section id="empty-state" class="empty-state" hidden>
+        <p id="empty-title"></p>
+        <p id="empty-copy"></p>
+      </section>
+
+      <footer class="popup-footer">
+        <a id="open-settings-link" href="../options/options.html" target="_blank" rel="noreferrer"></a>
+      </footer>
+    </main>
+
+    <script src="../lib/shared.js"></script>
+    <script src="popup.js"></script>
+  </body>
+</html>

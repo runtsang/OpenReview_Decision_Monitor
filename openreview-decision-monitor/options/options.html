@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>OpenReview Decision Monitor Settings</title>
+    <link rel="stylesheet" href="options.css">
+  </head>
+  <body>
+    <main class="page-shell">
+      <header class="page-header">
+        <div>
+          <p id="options-eyebrow" class="eyebrow"></p>
+          <h1 id="options-title"></h1>
+          <p id="options-lede" class="lede"></p>
+        </div>
+        <button id="save-settings" class="primary-button" type="button"></button>
+      </header>
+
+      <section class="panel">
+        <h2 id="general-heading"></h2>
+        <label class="field">
+          <span id="language-label"></span>
+          <select id="language-select"></select>
+        </label>
+        <label class="field">
+          <span id="poll-interval-label"></span>
+          <select id="poll-interval"></select>
+        </label>
+        <label class="field">
+          <span id="recipient-email-label"></span>
+          <input id="recipient-email" type="email" placeholder="you@example.com">
+        </label>
+      </section>
+
+      <section class="panel">
+        <h2 id="notifications-heading"></h2>
+        <div class="panel-title">
+          <h3 id="chrome-heading"></h3>
+          <label class="checkbox">
+            <input id="desktop-enabled" type="checkbox">
+            <span id="desktop-enabled-label"></span>
+          </label>
+        </div>
+        <p id="desktop-copy" class="panel-copy"></p>
+      </section>
+
+      <section class="panel">
+        <div class="panel-title">
+          <h2 id="emailjs-heading"></h2>
+          <label class="checkbox">
+            <input id="emailjs-enabled" type="checkbox">
+            <span id="emailjs-enabled-label"></span>
+          </label>
+        </div>
+        <div class="grid two-up">
+          <label class="field">
+            <span id="emailjs-public-key-label"></span>
+            <input id="emailjs-public-key" type="text" placeholder="Public key">
+          </label>
+          <label class="field">
+            <span id="emailjs-service-id-label"></span>
+            <input id="emailjs-service-id" type="text" placeholder="service_xxx">
+          </label>
+          <label class="field">
+            <span id="emailjs-template-id-label"></span>
+            <input id="emailjs-template-id" type="text" placeholder="template_xxx">
+          </label>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-title">
+          <h2 id="gmail-heading"></h2>
+          <label class="checkbox">
+            <input id="gmail-enabled" type="checkbox">
+            <span id="gmail-enabled-label"></span>
+          </label>
+        </div>
+        <label class="field">
+          <span id="gmail-client-id-label"></span>
+          <input id="gmail-client-id" type="text" placeholder="Google OAuth client ID">
+        </label>
+        <p id="gmail-status" class="token-status"></p>
+        <div class="button-row">
+          <button id="authorize-gmail" type="button" class="secondary-button"></button>
+          <button id="clear-gmail-token" type="button" class="ghost-button"></button>
+          <button id="test-notification" type="button" class="ghost-button"></button>
+        </div>
+      </section>
+
+      <p id="status-message" class="status-message" aria-live="polite"></p>
+    </main>
+
+    <script src="../lib/shared.js"></script>
+    <script src="options.js"></script>
+  </body>
+</html>
